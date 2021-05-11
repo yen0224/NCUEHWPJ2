@@ -53,6 +53,8 @@ class Car:
 ````
 
 #### 繪圖部分
+色票：
+<font color=#D0DB97>D0DB97<\font>
 ````python
 def paintroute():
     window_surface.fill((255, 255, 255))
