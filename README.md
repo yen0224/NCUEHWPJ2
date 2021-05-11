@@ -5,7 +5,7 @@
 - [ ] 結束動畫 
 - [ ] status bar
 ## ISSUE
-issue #1
+https://github.com/yen0224/NCUEHWPJ2/issues
 ## 程式內容說明
 ### 使用套件：
 | 套件名/程式名 | 版本 | 附註 |
