@@ -1,13 +1,13 @@
 import sys
 import pygame as pg
 import random as rdm
-from pygame.locals import QUIT, KEYDOWN, KEYUP
+from pygame.locals import QUIT, KEYDOWN, KEYUP, K_r
 imgPATH = 'media/car.png'
 pg.init()
 winnerExist = False
 font = pg.font.Font("media/Arial.ttf", 28)
 clock = pg.time.Clock()
-
+gamestatus = True
 
 class Car:
     def __init__(self, posix, velocity):
@@ -21,6 +21,10 @@ class Car:
     def run(self):
         self.posix += self.velocity
         return
+
+    def reset(self):
+        self.posix = 0
+        self.findvelo()
 
 
 def paintroute():
@@ -65,7 +69,7 @@ screen = pg.display.set_mode((800, 300))
 window_surface = pg.Surface(screen.get_size())
 paintroute()
 paintcar()
-text_surface = font.render("Press [> SPACE <] to start the race!!", True, (24, 29, 39))
+text_surface = font.render("Press any key to start the race!!", True, (24, 29, 39))
 window_surface.blit(text_surface, (0, 0))
 screen.blit(window_surface, (0, 0))
 pg.display.update()
@@ -80,8 +84,9 @@ while running:
         if event.type == QUIT:
             pg.quit()
             sys.exit()
+
         paintroute()
-        if KEY[pg.K_SPACE]:
+        if gamestatus and [pg.K_SPACE]:
             if CarA.posix <= 720 and CarB.posix <= 720 and CarC.posix <= 720 and CarD.posix <= 720:
                 CarA.run()
                 CarB.run()
@@ -90,12 +95,20 @@ while running:
                 text_surface = font.render('Position  [CarA]: %d [CarB]: %d [CarC]: %d [CarD]: %d'
                                            % (CarA.posix, CarB.posix, CarC.posix, CarD.posix),
                                            True, (24, 29, 39))
-                paintcar()
 
             else:
-                paintcar()
-                text_surface = font.render("Race is end.", True, (24, 29, 39))
-            # 更新畫面，等所有操作完成後一次更新（若沒更新，則元素不會出現）
-            window_surface.blit(text_surface, (0, 0))
-            screen.blit(window_surface, (0, 0))
-            pg.display.update()
+                text_surface = font.render("Race is end. Press R to reset and restart", True, (24, 29, 39))
+                gamestatus = False
+
+        if gamestatus is False and KEY[pg.K_r]:
+            CarA.reset()
+            CarB.reset()
+            CarC.reset()
+            CarD.reset()
+            gamestatus = True
+
+        paintcar()
+        # 更新畫面，等所有操作完成後一次更新（若沒更新，則元素不會出現）
+        window_surface.blit(text_surface, (0, 0))
+        screen.blit(window_surface, (0, 0))
+        pg.display.update()
