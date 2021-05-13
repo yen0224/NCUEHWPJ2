@@ -71,7 +71,7 @@ class Car:
         return
 ```
 
-```text
+
 #### 繪圖部分
 色票：
 <p><font color=#D0DB97>D0DB97, RGB(208, 219, 151)</font></p>
@@ -84,7 +84,7 @@ class Car:
 
 ![](https://i.imgur.com/zroyEIB.png)
 
-````python
+```python
 def paintroute():
     window_surface.fill((255, 255, 255))
     # 繪製跑道
