@@ -71,16 +71,19 @@ class Car:
         return
 ```
 
-
 #### 繪圖部分
+
 色票：
-<p><font color=#D0DB97>D0DB97, RGB(208, 219, 151)</font></p>
-<p><font color=#69B578>69B578, RGB(105, 181, 120)</font></p>
-<p><font color=#3A7D44>3A7D44, RGB(58, 125, 68)</font></p>
-<p><font color=#254D32>253D32, RGB(37, 77, 50)</font></p>
-<p><font color=#181D27>181D27, RGB(24, 29, 39)</font></p>
 
+D0DB97, RGB\(208, 219, 151\)
 
+69B578, RGB\(105, 181, 120\)
+
+3A7D44, RGB\(58, 125, 68\)
+
+253D32, RGB\(37, 77, 50\)
+
+181D27, RGB\(24, 29, 39\)
 
 ![](https://i.imgur.com/zroyEIB.png)
 
