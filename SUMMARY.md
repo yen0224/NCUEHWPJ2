@@ -21,3 +21,7 @@
 
 * [Untitled](zuo-ye-docs/untitled.md)
 
+---
+
+* [Cheat Sheet](cheat-sheet.md)
+
