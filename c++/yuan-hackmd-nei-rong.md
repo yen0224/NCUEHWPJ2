@@ -2,51 +2,11 @@
 description: C++ 教學講義
 ---
 
-# 原HackMD內容
+# CPP入門
 
+## **Basic** 
 
-
-### 建議學習順序
-
-1. [基本程式碼的概念](https://hackmd.io/4uvLo6aeTEGL1KEiA2oXFw?both#基本source-code架構)
-2. [輸出入](https://hackmd.io/4uvLo6aeTEGL1KEiA2oXFw?view#基本輸出入)
-3. [變數](https://hackmd.io/4uvLo6aeTEGL1KEiA2oXFw?both#基本內建型態primitive-built-in-type)
-4. 條件if
-5. while
-6. for
-7. 陣列
-
-   **建議編輯器：**
-
-   :::spoiler
-
-8. [Jetbrains® CLion](https://www.itread01.com/content/1543921514.html)（IDE） ![](https://i.imgur.com/ZcB14wS.png)
-9. [DevC++](https://sourceforge.net/projects/orwelldevcpp/)\(IDE\)[https://hackmd.io/4uvLo6aeTEGL1KEiA2oXFw\#](https://hackmd.io/4uvLo6aeTEGL1KEiA2oXFw#)
-
-![](https://i.imgur.com/IbiUTrB.png)
-
-* [Visual Studio®](https://visualstudio.microsoft.com/zh-hant/)\(IDE\)
-
-![](https://i.imgur.com/fR6hfxQ.png)
-
-* [VS Code](https://visualstudio.microsoft.com/zh-hant/)\(欲編譯需配置/類IDE\)
-
-![](https://i.imgur.com/eFUOl6g.png)
-
-* [Code::Blocks](http://www.codeblocks.org)
-
-![](https://i.imgur.com/ktyxjN3.png)
-
-> 以上都大同小異啦，但Visual studio通常都有自己的“功能”，上手需一段時間
->
-> * sublime\(欲編譯需配置/類IDE\)
-> * atom\(欲編譯需配置/類IDE\)
-> * Notepad++ \(純指令編譯/非IDE\)
-> * Linux Vi/Vim \(純指令編譯/非IDE\)
->
->   :::
-
-### 程式語言的發展
+### **程式語言的發展**
 
 #### 程式語言大致可以分成三種：機器語言、組合語言和高（低）階語言
 
@@ -78,14 +38,14 @@ C series語言的source code在進行編碼至機器碼的執行檔\(windows是.
 
 * 預先處理：預先處理是在進行編譯前的準備工作，包括去抓取header內容、將\#define出來的東西將數字與文字做替換（就是把所有出現的這個名字東西都換成數字啦），並組合成一個檔案
 
-  > 預先處理過程就是將\#include、\#define、\#if、特殊符號等_取出需要的東西後去除，且與原檔同義_，只有常數、字符串、變數定義、以及Ｃ關鍵字等\[name=yen0224\]
+  > 預先處理過程就是將\#include、\#define、\#if、特殊符號等_取出需要的東西後去除，且與原檔同義_，只有常數、字符串、變數定義、以及Ｃ關鍵字等
 
 * 編譯過程：在此階段中，編譯器會開始進行_語法的檢查及找出編譯路徑\(優化\)_，確認語法無誤後轉為組譯語言，接著組譯器開始再把由組譯語言轉換為機器語言，在輸出為目的檔。
 * 連結：將上步驟中產生的目的檔將各種目標文件鏈結起來，將為定義標示符與其路徑做對應，最後產生一動態鏈結資料庫，或執行檔
 
 命令列編譯指令： \(前往cpp檔位置\)
 
-```text
+```bash
 cd [address]
 ```
 
@@ -103,75 +63,77 @@ g++ -o name name.cpp
 
 #### 前處理器
 
-預處理器指示詞（例如 ==\#define== 和 ==\#ifdef== ）通常用來讓來源程式在不同的執行環境中變得更容易變更和編譯。 來源檔案中的指示詞會指示前處理器採取特定動作。 例如，前置處理器可以取代文字中的語彙基元、將其他檔案的內容插入原始程式檔，或是透過移除文字區段來隱藏編譯檔案的一部分。 在巨集展開之前，會辨識並執行前置處理器程式行。
+預處理器指示詞（例如 \#define和 \#ifdef ）通常用來讓來源程式在不同的執行環境中變得更容易變更和編譯。 來源檔案中的指示詞會指示前處理器採取特定動作。 例如，前置處理器可以取代文字中的語彙基元、將其他檔案的內容插入原始程式檔，或是透過移除文字區段來隱藏編譯檔案的一部分。 在巨集展開之前，會辨識並執行前置處理器程式行。
 
 目前學習階段用到的前處理器keyword有：
 
 * **define: 用來宣告常數、亦可宣告簡易function（不嚴謹喔！！因無型別的定義）**
 
-  ```text
-  //語法
-  #define 識別符 值
-  #define PI 3.14 //定義PI為常數3.14
-  #define multiply( a1 , a2 ) ( a1 * a2)//定義multiply()
-  ```
+```cpp
+//語法
+#define 識別符 值
+#define PI 3.14 //定義PI為常數3.14
+#define multiply( a1 , a2 ) ( a1 * a2)//定義multiply()
+```
 
 * **undef：取消\#define的作用**
 
-  ```text
-  //語法
-  #undef 識別符
-  #undef PI
-  ```
+```cpp
+//語法
+#undef 識別符
+#undef PI
+```
 
 * **include：告知前處理器指定檔案的內容包含在指示詞的位置**
 
-  ```text
-  //語法
-  #include <標頭檔名>
-  #include "路徑"
-  #include <iostream> //宣告引入“iostream”標頭
-  #include <algorithms>//宣告引入“algorithms”標頭
-  #include "usr/lib/head.h"//宣告引入head.h自訂標頭
-  ```
+```cpp
+//語法
+#include <標頭檔名>
+#include "路徑"
+#include <iostream> //宣告引入“iostream”標頭
+#include <algorithms>//宣告引入“algorithms”標頭
+#include "usr/lib/head.h"//宣告引入head.h自訂標頭
+```
 
 * **if \#elif \#else：條件式**
 
-  **基本source code架構**
+### **main.cpp**
 
-  ```text
-  #include <iostream>
-  using namespace std;
-  int main(/*int argc, char const *argv[]*/)
-  {
-    return 0;
-  }
-  ```
+```cpp
+#include <iostream>
+using namespace std;
+int main(/*int argc, char const *argv[]*/)
+{
+  return 0;
+}
+```
 
-**第一部分  \#include \:**
+**第一部分  \#include :**
 
-告訴前處理器，此source code會用到名為_iostream_的_headers_
+告訴前處理器，此source code會用到名為 _iostream_ 的_headers_
 
 * iostream 基本輸出入的標頭，包含ostream,istream
-* \"headers":標頭，為相關的函數\"定義"的地方
+* "headers":標頭，為相關的函數"定義"的地方
 
-**第二部分int main\(/\*int argc, char const \*argv\[\]\*/\){}**
+**第二部分int main\(\*int argc, char const \*argv\[\]\*\){}**
 
 * main function，為c++程式的基礎，是整個函式的主體，當作業系統執行程式時，呼叫的即是main\(\)
 * function 就跟數學中的函數一樣，是一個工作模組，並允許參數的輸入，並執行特定任務，最後輸出結果
 * int表示_回傳值_為整數型態（return type is integer）
 * int argc, int argc, char const \*argv\[\]:此為main function的參數列\(parameter list\)
+
   * int argc為宣告編號
   * argc\[0\]為第一參數
   * argv\[1\]為第二參數
   * 「以此類推」
   * 若此程式不需要任何參數資料以檔案等獨立形式輸入則可用void或直接留空代替
 
-    ```text
-    int main(void){}
-    或
-    int main(){}
-    ```
+  ```text
+  int main(void){}
+  或
+  int main(){}
+  ```
+
 * 註解：註解分為兩種形式，_單行註解_ 與_多行註解_
 * 單行註解：以兩個斜線//作為開頭，此行的東西不會被編譯，也不會被輸出
 
@@ -191,7 +153,7 @@ g++ -o name name.cpp
 
 括號內為函式的主要工作內容，return為回傳的關鍵字，在main函式中的return值較為特別，如同前面所說的“作業系統呼叫的是main函數”，同理main函數亦是回傳給作業系統直為電腦系統的，代表的是程式的執行狀態，0表示程式順利結束，其他非0零的值則由電腦做定義，_通常為錯誤碼_ :::spoiler 若為自訂函式，可回傳變數、字串、矩陣、運算式值或空值，一樣要記得宣告函式時要同時宣告回傳值型別
 
-```text
+```cpp
 void hello(){
     cout<<"hello world";
 }
@@ -200,26 +162,27 @@ int returnMAX(int a1,int a2){
 }
 ```
 
-:::
-
 #### 關鍵字與識別字
 
-* 關鍵字keyword：為啟用相關功能、被定義於編譯器的字，可以解釋為“當這些字被打出來時，會有些預先定義的功能被發動”，根據微軟developer docs寫道“關鍵字是具有特別意義的預先定義保留識別項，他們無法當作程式中的識別字做使用”。 ![](https://i.imgur.com/JNiFzEs.jpg)
+* 關鍵字keyword：為啟用相關功能、被定義於編譯器的字，可以解釋為“當這些字被打出來時，會有些預先定義的功能被發動”，根據微軟developer docs寫道“關鍵字是具有特別意義的預先定義保留識別項，他們無法當作程式中的識別字做使用”。
+
+![from Microsoft&#xAE; developer DOCS](https://i.imgur.com/JNiFzEs.jpg)
+
 * 識別字identifier：依程式需求自行定義的名稱，舉凡程式中所用的各種名稱都屬於識別字，標準程式庫、第三方程式庫中亦是。 [最新資訊](https://en.cppreference.com/w/cpp/keyword)
 
-### 基本輸出入
+## 基本輸出入
 
 由於c++可以說是由c語言「改良」後的新語言，故c語言的函式庫c++皆可使用 （base on C.）
 
 #### C++輸出入
 
-**\ cout**
+### **cout**
 
 cout物件，定義於iostream中，其可以將字串或數字輸出到標準輸出裝置上，和Ｃ語言中printf\(\)相同，但使用法不同
 
 cout物件可以接收由_串接運算子&lt;&lt;_所組成的字串，這些字串會依序組合成為一個更長的字串，再藉由cout物件輸出至螢幕上。
 
-```text
+```cpp
 //語法
 cout<<變數1或字串<<變數2或字串<<...<<變數n或字串;
 //example
@@ -230,34 +193,32 @@ cout<<"hello"<<" "<<"world";
 cout<<"After calculation, your BMI is"<<BMI;
 ```
 
-1. \&lt;&lt;為左移運算子
+1. &lt;&lt;為左移運算子
 2. 可輸出運算式的結果、變數值、文字
 3. 在句尾加endl，有換行和排清匯流排{可使資料立即顯示於螢幕上}的效果
 
-   ```text
-   cout<<........<<endl;
-   ```
+```cpp
+cout<<........<<endl;
+```
 
-   **\ cin**
+### **cin**
 
-   相較於cout的輸出，cin則是用來從鍵盤中輸入各種資料，利用資料流截取運算子&gt;&gt;，即可讀取自鍵盤的輸入，供執行中的程式使用
+相較於cout的輸出，cin則是用來從鍵盤中輸入各種資料，利用資料流截取運算子&gt;&gt;，即可讀取自鍵盤的輸入，供執行中的程式使用
 
-   ```text
-   cin>>[變數1](>>[變數2]>>...>>[變數n]);
-   ```
+```cpp
+cin>>[變數1](>>[變數2]>>...>>[變數n]);
+```
 
 #### C輸出入
 
-**\ printf\(\)**
+### **printf\(\)**
 
-```text
+```c
 printf( const char* format, ... );
 ```
 
 * const char\* format:填入輸出格式，後面填入參數
 * 格式化方法：
-
-  :::spoiler
 
   | 參數 | 用途 |
   | :---: | :---: |
@@ -266,13 +227,11 @@ printf( const char* format, ... );
   | %d | 整數int |
   | %f | 浮點數float |
   | %.nf | n為一數字，僅輸出到該位數 |
-  | %s | 字串\(可省） |
-
-  :::
+  | %s | 字串\(可省\) |
 
 Example:
 
-```text
+```c
 printf("abc");//輸出abc
 printf("%d",10);//輸出10
 printf("%d",a);//輸出（整數）變數a值
@@ -284,7 +243,7 @@ printf("今天的日期是：%d年%d月%d日，台幣兌美元匯率為%f\n",yea
 
 _more info:_ [https://en.cppreference.com/w/cpp/io/c/fprintf](https://en.cppreference.com/w/cpp/io/c/fprintf)
 
-### 變數—基本內建型態primitive built-in type
+## 變數—基本內建型態primitive built-in type
 
 看完上面的解說，我們應該已經成功在電腦上輸出資料，但有兩個問題：我們要如何輸入東西到電腦？還有上面一直提到的「變數」是什麼呢？？
 
@@ -321,11 +280,13 @@ _more info:_ [https://en.cppreference.com/w/cpp/io/c/fprintf](https://en.cpprefe
 | 布林類型 |  |  |  |
 | bool | 布林值 | 1 | true, false |
 
-:::spoiler C++11 標準新增char16\_t, char32\_t來表示UTF-16, UTF-32字元， 亦新增long long的整數型態 :::
+{% hint style="info" %}
+C++11 標準新增char16\_t, char32\_t來表示UTF-16, UTF-32字元， 亦新增long long的整數型態
+{% endhint %}
 
 #### 變數宣告
 
-```text
+```cpp
 //只宣告型別，代賦值
 type name1,[name2,name3,...];
 int a,b,c;
@@ -342,46 +303,48 @@ int a,b=33,c;
 
 _**變數**_，即為一可變的數，恰與亙久不變的_**常數**_相反，然而不管變數變了多少次，其在記憶體內的佔用空間不會改變（，故資料精度大於記憶體分配空間則會造成資料數值錯誤的**溢位overflow**現象）;**宣告**的概念，會指定實體的唯一名稱，以及其型別和其他特性的相關資訊。
 
-**字面常數literal**
+### **字面常數literal**
 
 即程式中直接寫出來的數值value
 
-**bool**
+### **布林值 bool**
 
 宣告\(declare\)布林型態的變數使用關鍵字\(keyword\) **bool**，其字面值有true和false，分別代表1,0，邏輯上的真與假
 
-**int, long int, short int**
+### **整數 int, long int, short int**
 
 一般而言，最常用的是int型態，_**沒有特別指定的整數字面常數皆會被視為int型態，欲使用long型態，則需在字面常數的尾巴加上l或Ｌ**_
 
-```text
+```cpp
 int a=1;
 long b=1234l;
 ```
 
-**float &double**
+### **浮點數float &double**
 
 最常使用的是double，_**沒有特別指定的浮點數字面常數會被視為double，欲使用float型態，需在字面常數尾加上f或F**_
 
-```text
+```cpp
 double a=2458.3721;
 float p=22.0f;
 ```
 
-**char**
+### **字元 char**
 
 宣告字元型態的變數使用關鍵字**char**，字元型態的字面常數為_單引號圍起來的單一字元_，或是單引號圍起來反斜線加上四位的十六位元數字
 
-```text
+```cpp
 char e='a';
 char f='2';
 char i='\n';
 char k='\a';
 ```
 
-char變數的字面常數是「文字」 沒錯，但事實上它是依據ASCII表將文字轉為數字來進行儲存的，每個字母有其專屬的數字代碼，大小有不同，故其亦有有效範圍且一樣是由數字決定 可參閱[ASCII表](https://zh.wikipedia.org/wiki/ASCII)\
+char變數的字面常數是「文字」 沒錯，但事實上它是依據ASCII表將文字轉為數字來進行儲存的，每個字母有其專屬的數字代碼，大小有不同，故其亦有有效範圍且一樣是由數字決定 可參閱[ASCII表](https://zh.wikipedia.org/wiki/ASCII)
 
 在上面程式碼區塊的3,4行可以看到由反斜線\加上一個英文字母的組合文字，其稱作**跳脫字元**，即一些不可見字元（換行、對其、雙引號（因已被定義））
+
+### 跳脫字元
 
 | 跳脫序列 | 代表意義 | ASCII CODE\(dex\) |
 | :---: | :---: | :--- |
@@ -407,17 +370,17 @@ char變數的字面常數是「文字」 沒錯，但事實上它是依據ASCII�
 * 函數的命名亦已大寫駝峰式命名，第一字通常為動詞
 * 簡易函式、或類別中的存取、修改函數，較常用小寫字母組合
 
-  **運算式expression**
+## **運算式expression**
 
-  _**Ｃ++中的每一行，都為一陳述，而每行陳述，可以運算式組成，並以==分號==作為運算式的結尾**_
+Ｃ++中的每一行，都為一陳述，而每行陳述，可以運算式組成，並以_**分號**_作為運算式的結尾
 
-  **運算式expression＝運算元oprand＋運算子operator**
+**運算式expression＝運算元oprand＋運算子operator**
 
 * operand1; 單一運算元
 * operand1 operator operand2; 運算元＋運算子
 * operand1? operand2 : operand3; 具條件判斷功能之運算式
 
-**算術運算子 arithmetic operator**
+### **算術運算子 arithmetic operator**
 
 | 優先順序 | 運算子 | 功能 | 用法 |
 | :--- | :--- | :--- | :--- |
@@ -429,18 +392,24 @@ char變數的字面常數是「文字」 沒錯，但事實上它是依據ASCII�
 | 3 | + | 加法 | expr + expr |
 | 3 | - | 減法 | expr - expr |
 
-:star:全數皆為左結合（由左邊看到右邊）
+{% hint style="info" %}
+全數皆為左結合（由左邊看到右邊）
+{% endhint %}
 
-包括加減乘除取餘數，分別符號為+-\*\/%，使用概念和數學的概念一模模一樣樣，唯有一個要注意的就是除法時要注意捨去的問題：
+包括加減乘除取餘數，分別符號為+-\*/%，使用概念和數學的概念一模模一樣樣，唯有一個要注意的就是除法時要注意捨去的問題：
 
-```text
+```cpp
 int a=1,b=3;
 cout<<a/b;//輸出值應該要是0.333
 ```
 
-實際結果：![](https://i.imgur.com/W5ab7ja.png)，然而浮點數除法就不會有此問題，因此要將原函式改為：
+實際結果：
 
-```text
+![](https://i.imgur.com/W5ab7ja.png)
+
+，然而浮點數除法就不會有此問題，因此要將原函式改為：
+
+```cpp
 float a=1,b=3;
 cout<<a/b;//輸出值應該要是0.333
 //或
@@ -452,14 +421,14 @@ cout<<(float)a/b;
 
 大家可以試試看此段程式碼，看結果有何不同：
 
-```text
+```cpp
 int a=1,b=3;
 cout<<float(a/b);
 ```
 
-結果 :arrow\_down\_small: :::spoiler 答案應該也是0對吧 原因是因為在電腦中的運算，和數學中的運算一樣也有先後順序 在這邊的步驟是：先算出1/3，但因為是整數除法得值為0，再將0轉為浮點數，得值依舊為0 :::
+結果 :答案應該也是0對吧 原因是因為在電腦中的運算，和數學中的運算一樣也有先後順序 在這邊的步驟是：先算出1/3，但因為是整數除法得值為0，再將0轉為浮點數，得值依舊為0 
 
-**遞增、遞減運算子 increment /decrement operator**
+### **遞增、遞減運算子 increment /decrement operator**
 
 | 種類 | 使用法 | 例子 |
 | :---: | :--- | :--- |
@@ -472,16 +441,12 @@ cout<<float(a/b);
 
 遞增減運算子的優先順序高於算數運算子，可以思考一下下列程式碼輸出的值為多少：
 
-```text
+```cpp
 b = 10 ;
 cout << 10 * (++b) ;
 ```
 
-:::spoiler 110，到cout那行時，b會先+1，再進行運算。 ::: 再思考一下如果對字元變數進行遞增會輸出什麼呢： :::spoiler 若對字元變數進行遞增並且輸出，可以輸出全部的字母
-
-:::
-
-**邏輯、關係運算子 logical &relational operator**
+### **邏輯、關係運算子 logical &relational operator**
 
 | 優先性 | 結合性 | 運算子 | 功能 | 用法 |
 | :---: | :---: | :---: | :---: | :---: |
@@ -516,7 +481,7 @@ if( i<j && j<k )
 
 原因：若k大於1，因關係運算子為_左結合_的，k會跟i&lt;j的結果進行判斷，即使k並無大於J，其與布林值的比較會是恆成立的\(true=1, false=0\)
 
-**指派與複合指派運算子**
+### **指派與複合指派運算子**
 
 指派運算子是_右結合_的，其左運算元需為一個可改變的lvalue； 複合指派，即是把“一個運算子套用在一個物件上，然後結果指派在相同的物件”這個動作合一 以下為用法：
 
@@ -528,21 +493,21 @@ if( i<j && j<k )
 | /= | d=d/1000 | d/=1000 |
 | %= | e=e%3 | e%=3 |
 
-**條件運算子（?:運算子）**
+### **條件運算子（?:運算子）**
 
-```text
+```cpp
 cond ? exp1 : exp2 ;
 ```
 
 _cond_是用來表示條件的運算式，而exp1和exp2為相同型別的運算，其執行方式為：當cond為true時，exp1會被執行，若否，exp2執行
 
-```text
+```cpp
 int score = 60 ;
 cout << ((score > 60 ? ) pass : fail);
 //result :fail
 ```
 
-**位元運算子**
+### **位元運算子**
 
 | 優先序 | 運算子 | 功能 | 用法 |
 | :---: | :---: | :---: | :---: |
@@ -553,13 +518,15 @@ cout << ((score > 60 ? ) pass : fail);
 | 4 | ^ | 位元XOR | expr1 ^ expr2 |
 | 5 | \| | 位元OR | expr1 \| expr2 |
 
-==建議將位元運算子_只用於_unsigned型別，才不會使正負號錯誤==
+{% hint style="info" %}
+建議將位元運算子_只用於_unsigned型別，才不會使正負號錯誤
+{% endhint %}
 
-**位元NOT,AND,XOR,OR**
+### **位元NOT,AND,XOR,OR**
 
 NOT運算：將每個bit反轉 AND,XOR,OR:將expr1與expr2進行邏輯運算
 
-**sizeof運算子**
+### **sizeof運算子**
 
 回傳型別所佔大小
 
@@ -570,19 +537,23 @@ sizeof a;
 
 **總表**
 
-![](https://i.imgur.com/q6onP91.png) ![](https://i.imgur.com/utjl8PK.png)
+ 
 
-### 述句statement
+![](https://i.imgur.com/q6onP91.png)
+
+![](https://i.imgur.com/utjl8PK.png)
+
+## 述句statement
 
 程式的結構主要三種，其共同的特徵是，只有一個進入點，也只有一個出口 1. 循序性結構：採top-to-down的敘述方式，當一個敘述執行完畢之後，接著在執行下一行敘述 2. 選擇性結構：此結構會依據條件的成立與否，再決定要執行哪些敘述 3. 重複性結構：此結構會根據判斷條件的成立與否，決定程式段落的執行次數
 
-#### 選擇性結構—if述句 \(if statement\)
+### 選擇性結構—if述句 \(if statement\)
 
 最簡單的條件判斷式：一個if加上一個運算式，若運算式的結果為_**非零**_，則進行if括號內的述句，若為零，則進行else的內容，若無else則不進行任何動作； 在多個條件運算式中，則以else if關鍵字進行第二條件的判斷，else if可有可無，務必注意的是，連續多個條件的判斷，應將最小範圍的條件排在最前，否則可能會有淺在的bug產生。
 
 巢狀if：if中又有if
 
-```text
+```cpp
 if(/*condiotion1*/){
     statement1;
 }
@@ -630,67 +601,72 @@ for example \#1 閏年的判斷： 已知判斷閏年的條件有：
   }
   ```
 
-  可觀察一下4, 100, 400出現位置、及改變他們的位置可能會有什麼影響；若硬要改變位置，相對應的寫法要怎麼寫呢？為何要用巢狀，不用多個if和邏輯運算式呢？？
+  可觀察一下：
 
-  :::spoiler
+* 4, 100, 400出現位置、及改變他們的位置可能會有什麼影響？
+* 若硬要改變位置，相對應的寫法要怎麼寫呢？
+* 為何要用巢狀，不用多個if和邏輯運算式呢？？
+
+
 
   Q1:4,100,400出現位置：
 
-* 從數學來看4是100,400的因數，100又是400的因數，（假設相同寫法），4為公因數，故可當作最大層的過濾，若第一層以400做過濾，對於小於400的數取餘數會造成全部都被濾掉的問題，100同理
-* 接著是以閏年條件來看，逢四閏，逢一百不閏，遇四百又閏，故100倍數為例外狀況，400和100公因數為100，（非4之倍數、為4倍數但非百倍數已排除），可先做100倍數之過濾，再對400倍數做處理即可
-* 條件過濾的方法（尤其適用於多個條件時）：
-  * 先找出共同條件（由亂七八糟的不同點中找到相同的）
-  * 針對共同條件找出異處（從相同的在找出不同）
-  * 針對異處做處理
-  * 如車子：相同點有大小、位子數、顏色，不同點在於通過的安規、品牌、燃油or燃氣or電力，想找出想要的車可以這樣找：
-  * 先從大小、位子數挑
-  * 安規、（我是環保左膠）電力驅動
-  * 顏色＆品牌
+  * 從數學來看4是100,400的因數，100又是400的因數，（假設相同寫法），4為公因數，故可當作最大層的過濾，若第一層以400做過濾，對於小於400的數取餘數會造成全部都被濾掉的問題，100同理
+  * 接著是以閏年條件來看，逢四閏，逢一百不閏，遇四百又閏，故100倍數為例外狀況，400和100公因數為100，（非4之倍數、為4倍數但非百倍數已排除），可先做100倍數之過濾，再對400倍數做處理即可
+  * 條件過濾的方法（尤其適用於多個條件時）：
+    * 先找出共同條件（由亂七八糟的不同點中找到相同的）
+    * 針對共同條件找出異處（從相同的在找出不同）
+    * 針對異處做處理
+    * 如車子：相同點有大小、位子數、顏色，不同點在於通過的安規、品牌、燃油or燃氣or電力，想找出想要的車可以這樣找：
+    * 先從大小、位子數挑
+    * 安規、（我是環保左膠）電力驅動
+    * 顏色＆品牌
 
-Q2:通靈能力已全部耗盡，我猜不到你想啥，略 Q3:使用多個if和邏輯條件組合呢？
 
-* 用多個if＋邏輯判斷式，可行，問題是出現在邏輯判斷的部分，C\(2,3\)=6，需進行12次的邏輯比對（比大小＆邏輯，6\*2=12），相較巢狀if只需進行3次比大小運算，巢狀效率（不符合的直接丟到else或不處置略過，只接少一層比對）較優，更別提即有更多的條件要判斷的情形了
 
-  :::
+  Q2:通靈能力已全部耗盡，我猜不到你想啥，略 
 
-  **if-else變形：switch statement**
+* Q3:使用多個if和邏輯條件組合呢？
+  * 用多個if＋邏輯判斷式，可行，問題是出現在邏輯判斷的部分，C\(2,3\)=6，需進行12次的邏輯比對（比大小＆邏輯，6\*2=12），相較巢狀if只需進行3次比大小運算，巢狀效率（不符合的直接丟到else或不處置略過，只接少一層比對）較優，更別提即有更多的條件要判斷的情形了
 
-  ```text
-  switch(variables){
-  case const1:
-    states;
-    break;
-  case const2:
-    states;
-    break;
-  default:
-    states;
-  }
-  ```
+### **if-else變形：switch statement**
 
-  **重複性結構**
+```cpp
+switch(variables){
+case const1:
+  states;
+  break;
+case const2:
+  states;
+  break;
+default:
+  states;
+}
+```
 
-  **while述句 \(while statement\)**
+### **重複性結構**
 
-  ```text
-  while(/*condition*/){
-    statement;
-  }
-  ```
+### **while述句 \(while statement\)**
 
-  ```text
-  do{
-    statement;
-  }while(/*condition*/)
-  ```
+```cpp
+while(/*condition*/){
+  statement;
+}
+```
 
-  **for 述句 （for statement）**
+```cpp
+do{
+  statement;
+}while(/*condition*/)
+```
 
-  ```text
-  for ( init-statement ; condition ; iteration_expression ) statement
-  ```
+### **for 述句 （for statement）**
 
-  for迴圈由三部分組成：
+```cpp
+for ( init-statement ; condition ; iteration_expression ) statement
+```
+
+for迴圈由三部分組成：
 
 * 第一是在執行迴圈之前，所需要先給定的初始值設定。
 * 第二是進入或留在迴圈的條件，有如while指令後面接著的判斷式。 
@@ -698,9 +674,9 @@ Q2:通靈能力已全部耗盡，我猜不到你想啥，略 Q3:使用多個if�
 
 由上面三個部分，可以得知for loop 等效於:
 
-```text
+```cpp
 {
-    init_statement 
+    init_statement ;
     while ( condition ) { 
         statement;
         iteration_expression ; 
@@ -708,15 +684,17 @@ Q2:通靈能力已全部耗盡，我猜不到你想啥，略 Q3:使用多個if�
 }
 ```
 
-> 對於for語法還不熟悉的可以先嘗試用while去寫，尤其是做有計數器的題目可以更快掌握for的用法\[name=yen020224\]
+{% hint style="info" %}
+對於for語法不熟的可以嘗試用while去寫，尤其是有計數器的題目可以更快掌握for的用法
+{% endhint %}
 
-#### 迴圈跳離
+### 迴圈跳離
 
-**==break==**
+**break**
 
 break敘述可以讓程式強迫跳離回圈，當程式執行到break敘述時，即會離開回圈，繼續執行回圈之外的下一行敘述（若違巢狀迴圈，則跳至此回圈外之下行敘述）
 
-```text
+```cpp
 for(;;;){
     staA;
     staB;
@@ -728,21 +706,72 @@ for(;;;){
 statements;//break之後會執行這行
 ```
 
-**==continue==**
+#### **continue**
 
 continue敘述，
 
-**==goto==**
+#### **goto**
 
-### 陣列
+## 物件導向程式設計
+
+### What is OOP?
+
+| 項目 | 說明 |
+| :--- | :--- |
+| 程序導向 |  |
+| 物件導向 |  |
+
+### 物件
+
+物件類別的變數，亦稱為類別的時限或類別的樣例化（instance），白話文：物件即為“模型”，在這些模型裡已設定好他所具備的屬性及方法
+
+{% hint style="info" %}
+物件導向程式的設計步驟：
+
+1. 設計類別
+2. 樣例（物件）類別
+3. 使用物件
+{% endhint %}
+
+#### 設計類別
+
+```cpp
+class 類別名稱 {
+    private:
+        屬性成員;
+        函式成員;
+    protected:
+        屬性成員;
+        函式成員;
+    public:
+        屬性成員;
+        函式成員;
+}
+```
+
+| 封裝層級 | 說明 |
+| :--- | :--- |
+| private | 類別內存取 |
+| protected | 折衷 |
+| public | 類別、類別物件皆可存取 |
+
+### 封裝、繼承、多型
+
+### 封裝 Encapsulation
+
+### 繼承 Inheritance
+
+### 多型 Polymorphism
+
+## 陣列
 
 > 陣列array是由一群相同型態的變數所組成的變數型態，他們以一個共同的名稱表示，陣列中的個別元素\(element\)則以註標\(index\)來標示其存放的位置；一陣列的複雜程度可分為一維、多維陣列
->
-> #### 一維陣列
->
+
+### 一維陣列
+
 > ![](https://i.imgur.com/5BVGjNq.png) **宣告法1：純宣告**
 >
-> ```text
+> ```cpp
 > type name[amount];
 > //[資料型態] 陣列名稱[元素數量];
 > //e.g.
@@ -755,17 +784,26 @@ continue敘述，
 >
 > \`\`\`cpp= //\[資料型態\] 陣列名稱\[n\]={初值0,1,2,.....,n-1}; //注意 //注意 //注意 //註標只有到n-1，因為是從0開始的 type name\[n\]={0,1,2,3,...,n-1} //e.g int monthDay\[12\]={31,28,31,30,31,30,31,31,30,31,30,31}; //也可這樣寫 int day\[\]={31,28,31,30,31,30,31,31,30,31,30,31};
 
-```text
-編譯器錯誤訊息\
+```
+編譯器錯誤訊息
+```
+
+```cpp
 若所宣告大小與實際情形不符：\
 宣告數>輸入數：其餘以==0==補齊\
 宣告數<輸入數：出現錯誤訊息**"太多初始設定式值"**\
 (以macos為例：)
 ![](https://i.imgur.com/kkbMD6g.png)
 
-若是要讓使用者輸入值可以怎麼寫？\
-ANS:用==for迴圈==
-```cpp=
+若是要讓使用者輸入值可以怎麼寫？
+ANS:用for迴圈
+```
+
+{% hint style="info" %}
+
+{% endhint %}
+
+```cpp
 #include <iostream>
 using std::cin;
 using std::cout;
@@ -786,7 +824,7 @@ int main(void){
 
 ~~\#\# 函數~~
 
-### 指標與參考
+## 指標與參考
 
 > 指標pointer儲存變數的記憶體位址address，參考reference為變數的別名alias。
 
@@ -842,7 +880,7 @@ cout << t << endl;
 
 #### new關鍵字
 
-### Error Code ＆ Bug排解
+## Error Code ＆ Bug排解
 
 bug有兩種，其中一個幾乎可以依靠編譯器的錯誤碼去判斷，另一種則需去檢視程式碼去找出錯誤
 
@@ -861,13 +899,15 @@ bug有兩種，其中一個幾乎可以依靠編譯器的錯誤碼去判斷，�
 
   **邏輯錯誤、演算法錯誤：為bug中最常發生的錯誤，且有時候會找很多次還找不到，甚至bug會生更多bug\(苦笑...\)，最後可能要整格程式碼重寫，並且算每個不同參數直到找到出錯點在哪，這就是最可怕的debugging過程**
 
--&gt;建議解法：小鴨除錯法\(Rubber Duck Debugging\)，找一個人或物，向他一行一行解釋程式碼的功用與執行過程，藉此找到矛盾及激發靈感（但因為電腦工程師很多都是邊緣人所以只能跟小鴨講 \(;´༎ຶД༎ຶ\`\)\)
+{% hint style="info" %}
+-&gt;建議解法：小鴨除錯法\(Rubber Duck Debugging\)，找一個人或物，向他一行一行解釋程式碼的功用與執行過程，藉此找到矛盾及激發靈感（但因為電腦工程師很多都是邊緣人所以只能跟小鴨講 \(;´༎ຶД༎ຶ\`\)
+{% endhint %}
 
 ![](https://i.imgur.com/Qn4fx36.png)
 
 ### Reference 參考資料
 
-* * &lt;旗標出版 C++教學手冊 洪偉恩著&gt;
+* &lt;旗標出版 C++教學手冊 洪偉恩著&gt;
 * C++ 入門手冊
 * [Microsoft® developers DOCS](https://docs.microsoft.com/zh-tw/cpp/?view=msvc-160)
 * [http://billor.chsh.chc.edu.tw/IT/Supply/01.pdf](http://billor.chsh.chc.edu.tw/IT/Supply/01.pdf)

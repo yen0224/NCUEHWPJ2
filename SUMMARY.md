@@ -1,6 +1,7 @@
 # Table of contents
 
 * [彰化師大機電系第二次實作作業（version 1.0）](README.md)
+* [Cheat Sheet](cheat-sheet.md)
 
 ## Python
 
@@ -9,8 +10,9 @@
 
 ## C++
 
-* [原HackMD內容](c++/yuan-hackmd-nei-rong.md)
-* [OOP 物件導向程式](c++/oop-wu-jian-dao-xiang-cheng-shi.md)
+* [Editor & IDE](c++/editor-and-ide.md)
+* [CPP入門](c++/yuan-hackmd-nei-rong.md)
+* [OOP 物件導向程式 \(dispatch\)](c++/oop-wu-jian-dao-xiang-cheng-shi.md)
 
 ## Command Line Operation
 
