@@ -1,7 +1,15 @@
+"""
+environment:
+|-Python v3.8.8
+|-Anaconda v4.10.1
+|-Pip v21.0.1
+  |-Pygame
+"""
 import sys
 import pygame as pg
 import random as rdm
 # from pygame.locals import QUIT, KEYDOWN, KEYUP, K_r
+# TODO sprite部分怪怪ㄉ
 imgPATH = 'media/car.png'
 pg.init()
 winnerExist = False
@@ -10,10 +18,14 @@ clock = pg.time.Clock()
 gamestatus = True
 
 
-class Car:
-    def __init__(self, posix, velocity):
+class Car(pg.sprite.Sprite):
+    def __init__(self, posix):
+        pg.sprite.Sprite.__init__(self)
+        self.image = pg.image.load(imgPATH)
+        self.rect = self.image.get_rect()
         self.posix = posix
-        self.velocity = velocity
+        self.rect.topleft = posix
+        self.velocity = 0
 
     def findvelo(self):
         self.velocity = rdm.randrange(1, 15, 1)
@@ -42,17 +54,17 @@ def paintroute():
 
 
 def paintcar():
-    pg.draw.rect(window_surface, (255, 255, 255), [CarA.posix, 75, 50, 30])
-    pg.draw.rect(window_surface, (255, 255, 255), [CarB.posix, 135, 50, 30])
-    pg.draw.rect(window_surface, (255, 255, 255), [CarC.posix, 195, 50, 30])
-    pg.draw.rect(window_surface, (255, 255, 255), [CarD.posix, 255, 50, 30])
+    pg.draw.rect(window_surface, (255, 255, 255), [CarA.posix, 50, 30])
+    pg.draw.rect(window_surface, (255, 255, 255), [CarB.posix, 50, 30])
+    pg.draw.rect(window_surface, (255, 255, 255), [CarC.posix, 50, 30])
+    pg.draw.rect(window_surface, (255, 255, 255), [CarD.posix, 50, 30])
 
 
 # initialize
-CarA = Car(0, 0)
-CarB = Car(0, 0)
-CarC = Car(0, 0)
-CarD = Car(0, 0)
+CarA = Car([0, 75])
+CarB = Car([0, 135])
+CarC = Car([0, 195])
+CarD = Car([0, 255])
 # set v
 CarA.findvelo()
 CarB.findvelo()
@@ -108,9 +120,9 @@ while running:
             CarD.reset()
             gamestatus = True
 
-        paintroute()
-        paintcar()
-        # 更新畫面，等所有操作完成後一次更新（若沒更新，則元素不會出現）
-        window_surface.blit(text_surface, (0, 0))
-        screen.blit(window_surface, (0, 0))
-        pg.display.update()
+    paintroute()
+    paintcar()
+    # 更新畫面，等所有操作完成後一次更新（若沒更新，則元素不會出現）
+    window_surface.blit(text_surface, (0, 0))
+    screen.blit(window_surface, (0, 0))
+    pg.display.update()
