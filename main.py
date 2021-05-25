@@ -3,32 +3,31 @@ environment:
 |-Python v3.8.8
 |-Anaconda v4.10.1
 |-Pip v21.0.1
-  |-Pygame
+  |-Pygame\
+TODO: 1. 結束動畫
+TODO: 2. 比賽結束應有提示（command line）
 """
 import sys
 import pygame as pg
 import random as rdm
 # from pygame.locals import QUIT, KEYDOWN, KEYUP, K_r
-# TODO sprite部分怪怪ㄉ
 imgPATH = 'media/car.png'
 pg.init()
 winnerExist = False
 font = pg.font.Font("media/Arial.ttf", 28)
 clock = pg.time.Clock()
 gamestatus = True
-
-
-class Car(pg.sprite.Sprite):
-    def __init__(self, posix):
-        pg.sprite.Sprite.__init__(self)
-        self.image = pg.image.load(imgPATH)
-        self.rect = self.image.get_rect()
+carImg = pg.image.load(imgPATH)
+carImg = pg.transform.scale(carImg, (100, 60))
+class Car():
+    def __init__(self, posix, name):
         self.posix = posix
-        self.rect.topleft = posix
         self.velocity = 0
+        self.name = name
 
     def findvelo(self):
         self.velocity = rdm.randrange(1, 15, 1)
+        print("velocity has been set, Car", self.name, "\'s velocity has been set to", self.velocity, "pixel/s")
         return
 
     def run(self):
@@ -54,28 +53,23 @@ def paintroute():
 
 
 def paintcar():
-    pg.draw.rect(window_surface, (255, 255, 255), [CarA.posix, 50, 30])
-    pg.draw.rect(window_surface, (255, 255, 255), [CarB.posix, 50, 30])
-    pg.draw.rect(window_surface, (255, 255, 255), [CarC.posix, 50, 30])
-    pg.draw.rect(window_surface, (255, 255, 255), [CarD.posix, 50, 30])
+    window_surface.blit(carImg, (CarA.posix, yA-15))
+    window_surface.blit(carImg, (CarB.posix, yB-15))
+    window_surface.blit(carImg, (CarC.posix, yC-15))
+    window_surface.blit(carImg, (CarD.posix, yD-15))
 
-
+yA, yB, yC, yD = 75, 135,195, 255
 # initialize
-CarA = Car([0, 75])
-CarB = Car([0, 135])
-CarC = Car([0, 195])
-CarD = Car([0, 255])
+CarA = Car(0, 'A')  # y=75
+CarB = Car(0, 'B')  # y=135
+CarC = Car(0, 'C')  # y=195
+CarD = Car(0, 'D')  # y=255
+
 # set v
 CarA.findvelo()
 CarB.findvelo()
 CarC.findvelo()
 CarD.findvelo()
-# test print the velocity
-
-print(CarA.velocity, "pixel(s) per time unit")
-print(CarB.velocity, "pixel(s) per time unit")
-print(CarC.velocity, "pixel(s) per time unit")
-print(CarD.velocity, "pixel(s) per time unit")
 
 # 設置視窗標題為 Car Race
 pg.display.set_caption('Car Race')
@@ -118,6 +112,7 @@ while running:
             CarB.reset()
             CarC.reset()
             CarD.reset()
+            print("-------------------------------------------------")
             gamestatus = True
 
     paintroute()
